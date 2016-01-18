@@ -1,0 +1,30 @@
+{
+  "name": "basecrm",
+  "version": "0.0.1",
+  "description": "Base CRM client for NodeJS",
+  "keywords": [
+    "basecrm",
+    "crm",
+    "rest",
+    "api",
+    "promise"
+  ],
+  "homepage": "https://github.com/yurypaleev/BaseCRM",
+  "bugs": {
+    "url": "https://github.com/yurypaleev/BaseCRM/issues"
+  },
+  "license": "(MIT OR Apache-2.0)",
+  "author": "Yury Paleev <yurypaleev@gmail.com>",
+  "main": "src/basecrm.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yurypaleev/BaseCRM.git"
+  },
+  "dependencies": {
+    "request": "^2.67.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
