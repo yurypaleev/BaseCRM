@@ -18,7 +18,7 @@
   "main": "src/basecrm.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yurypaleev/BaseCRM.git"
+    "url": "git@github.com:yurypaleev/BaseCRM.git"
   },
   "dependencies": {
     "request": "^2.67.0"
