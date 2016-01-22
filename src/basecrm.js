@@ -1,3 +1,4 @@
+var Promise = require('promise');
 var request = require('request');
 var qs = require('qs');
 
@@ -73,7 +74,7 @@ BaseCRM.prototype.request = function(options) {
                 json: options.data,
                 timeout: clientOptions.timeout * 1000
             }, function(error, response, body) {
-                body = JSON.parse(body || 'null');
+                body = typeof body === 'string' ? JSON.parse(body || 'null') : body;
 
                 if(error) {
                     reject(new Error(error));
@@ -151,6 +152,6 @@ BaseCRM.prototype.delete = function(resource) {
     });
 };
 
-BaseCRM.version = require('../package').version;
+BaseCRM.version = 'v' + require('../package').version;
 
 module.exports = BaseCRM;
