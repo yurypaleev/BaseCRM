@@ -133,7 +133,7 @@ crm.users.self()
 ```
 
 ## License
-MIT
+MIT or Apache 2.0
 
 ## Bug Reports
-Report [here](https://github.com/basecrm/basecrm-php/issues).
+Report [here](https://github.com/yurypaleev/BaseCRM/issues).
