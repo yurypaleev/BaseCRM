@@ -1,6 +1,6 @@
 {
   "name": "basecrm",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Base CRM client for NodeJS",
   "keywords": [
     "basecrm",
@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "promise": "^7.1.1",
+    "qs": "^6.1.0",
     "request": "^2.67.0"
   }
 }
