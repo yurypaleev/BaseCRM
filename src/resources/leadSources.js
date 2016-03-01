@@ -12,7 +12,7 @@ LeadSources.prototype.find = function(data) {
 };
 
 LeadSources.prototype.create = function(data) {
-    return this.crm.create('lead_sources', data, 'source');
+    return this.crm.create('lead_sources', data);
 };
 
 LeadSources.prototype.update = function(id, data) {

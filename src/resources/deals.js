@@ -12,7 +12,7 @@ Deals.prototype.find = function(data) {
 };
 
 Deals.prototype.create = function(data) {
-    return this.crm.create('deals', data, 'deal');
+    return this.crm.create('deals', data);
 };
 
 Deals.prototype.update = function(id, data) {

@@ -12,7 +12,7 @@ Tasks.prototype.find = function(data) {
 };
 
 Tasks.prototype.create = function(data) {
-    return this.crm.create('tasks', data, 'task');
+    return this.crm.create('tasks', data);
 };
 
 Tasks.prototype.update = function(id, data) {

@@ -18,7 +18,7 @@ LineItems.prototype.create = function(orderId, data) {
     if(typeof orderId !== 'number') {
         orderId = orderId.id;
     }
-    return this.crm.create('orders/' + orderId + '/line_items', data, 'line_item');
+    return this.crm.create('orders/' + orderId + '/line_items', data);
 };
 
 LineItems.prototype.remove = function(orderId, id) {

@@ -1,6 +1,4 @@
-var Promise = require('promise');
-var request = require('request');
-var qs = require('qs');
+var rp = require('request-promise');
 
 //  resources
 var account = require('./resources/account');
@@ -33,11 +31,9 @@ function BaseCRM(options) {
         timeout: 30
     };
 
-    for(var option in options) {
-        if(options.hasOwnProperty(option) && (option in this.options)) {
-            this.options[option] = options[option];
-        }
-    }
+    Object.keys(options).forEach(function(key) {
+        this.options[key] = options[key];
+    }.bind(this));
 
     this.account = account;
     this.associatedContacts = new AssociatedContacts(this);
@@ -59,46 +55,19 @@ function BaseCRM(options) {
 }
 
 BaseCRM.prototype.request = function(options) {
-    var clientOptions = this.options;
-
-    if(typeof clientOptions.accessToken === 'string') {
-        return new Promise(function(resolve, reject) {
-            request({
-                method: options.method,
-                url: clientOptions.baseUrl + '/v2/' + options.resource + '?' + decodeURI(qs.stringify(options.params)),
-                headers: {
-                    'accept': 'application/json',
-                    'user-agent': clientOptions.userAgent,
-                    'authorization': 'bearer ' + clientOptions.accessToken
-                },
-                json: options.data,
-                timeout: clientOptions.timeout * 1000
-            }, function(error, response, body) {
-                body = typeof body === 'string' ? JSON.parse(body || 'null') : body;
-
-                if(error) {
-                    reject(new Error(error));
-                } else
-                if(response.statusCode >= 200 && response.statusCode < 300) {
-                    resolve(body);
-                } else {
-                    var err = new Error;
-                    err.statusCode = parseInt(body.meta.http_status);
-                    err.name = body.errors[0].error.code;
-                    err.message = body.errors[0].error.message;
-                    err.details = body.errors[0].error.details;
-                    err.link = body.errors[0].meta.links.more_info;
-                    reject(err);
-                }
-            });
-        });
-    } else {
-        var err = new Error;
-        err.name = 'token';
-        err.message = 'token is bad';
-        err.details = 'Required access token is missing, malformed, expired, or invalid.';
-        return Promise.reject(err);
-    }
+    return rp({
+        method: options.method,
+        baseUrl: this.options.baseUrl,
+        uri: '/v2/' + options.resource,
+        body: options.data,
+        qs: options.params,
+        headers: {
+            'user-agent': this.options.userAgent,
+            'authorization': 'bearer ' + this.options.accessToken
+        },
+        timeout: (options.timeout || this.options.timeout) * 1000,
+        json: true
+    });
 };
 
 BaseCRM.prototype.find = function(resource, params) {
@@ -107,29 +76,22 @@ BaseCRM.prototype.find = function(resource, params) {
         resource: resource,
         params: params
     }).then(function(res) {
-        return Promise.resolve(res.items ? res.items.map(function(item) {
-            return item.data;
-        }) : res.data);
+        return res.meta.type === 'collection' ?
+            res.items.map(function(item) {
+                return item.data;
+            }) :
+            res.data;
     });
 };
-BaseCRM.prototype.create = function(resource, data, metaType) {
-    return this.createOrUpdate(resource, null, metaType ? {
-        data: data,
-        meta: {
-            type: metaType
-        }
-    } : {
-        data: data
-    }).then(function(res) {
-        return Promise.resolve(res.data);
-    });
-};
-BaseCRM.prototype.createOrUpdate = function(resource, params, data) {
+BaseCRM.prototype.create = function(resource, data) {
     return this.request({
         method: 'POST',
         resource: resource,
-        params: params,
-        data: data
+        data: {
+            data: data
+        }
+    }).then(function(res) {
+        return res.data;
     });
 };
 BaseCRM.prototype.update = function(resource, data) {
@@ -140,7 +102,7 @@ BaseCRM.prototype.update = function(resource, data) {
             data: data
         }
     }).then(function(res) {
-        return Promise.resolve(res.data);
+        return res.data;
     });
 };
 BaseCRM.prototype.delete = function(resource) {
@@ -148,7 +110,7 @@ BaseCRM.prototype.delete = function(resource) {
         method: 'DELETE',
         resource: resource
     }).then(function() {
-        return Promise.resolve(true);
+        return true;
     });
 };
 

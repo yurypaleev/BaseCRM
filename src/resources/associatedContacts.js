@@ -15,7 +15,7 @@ AssociatedContacts.prototype.create = function(dealId, data) {
     if(typeof dealId !== 'number') {
         dealId = dealId.id;
     }
-    return this.crm.create('deals/' + dealId + '/associated_contacts', data, 'associated_contact');
+    return this.crm.create('deals/' + dealId + '/associated_contacts', data);
 };
 
 AssociatedContacts.prototype.remove = function(dealId, contactId) {

@@ -1,6 +1,6 @@
 {
   "name": "basecrm",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Base CRM client for NodeJS",
   "keywords": [
     "basecrm",
@@ -15,14 +15,15 @@
   },
   "license": "MIT",
   "author": "Yury Paleev <yurypaleev@gmail.com>",
-  "main": "src/basecrm.js",
+  "main": "./src/basecrm.js",
   "repository": {
     "type": "git",
     "url": "git@github.com:yurypaleev/BaseCRM.git"
   },
   "dependencies": {
-    "promise": "^7.1.1",
-    "qs": "^6.1.0",
-    "request": "^2.67.0"
+    "request-promise": "^2.0.1"
+  },
+  "engines": {
+    "node": ">=0.10.0"
   }
 }

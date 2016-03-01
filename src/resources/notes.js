@@ -12,7 +12,7 @@ Notes.prototype.find = function(data) {
 };
 
 Notes.prototype.create = function(data) {
-    return this.crm.create('notes', data, 'note');
+    return this.crm.create('notes', data);
 };
 
 Notes.prototype.update = function(id, data) {

@@ -12,7 +12,7 @@ Tags.prototype.find = function(data) {
 };
 
 Tags.prototype.create = function(data) {
-    return this.crm.create('tags', data, 'tag');
+    return this.crm.create('tags', data);
 };
 
 Tags.prototype.update = function(id, data) {

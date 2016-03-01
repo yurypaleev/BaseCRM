@@ -12,7 +12,7 @@ Products.prototype.find = function(data) {
 };
 
 Products.prototype.create = function(data) {
-    return this.crm.create('products', data, 'product');
+    return this.crm.create('products', data);
 };
 
 Products.prototype.update = function(id, data) {

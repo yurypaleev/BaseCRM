@@ -12,7 +12,7 @@ LossReasons.prototype.find = function(data) {
 };
 
 LossReasons.prototype.create = function(data) {
-    return this.crm.create('loss_reasons', data, 'loss_reason');
+    return this.crm.create('loss_reasons', data);
 };
 
 LossReasons.prototype.update = function(id, data) {
