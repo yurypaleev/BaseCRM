@@ -24,7 +24,7 @@ Deals.prototype.delete = function(id) {
 };
 
 Deals.prototype.upsert = function(data, params) {
-    return this.crm.upsert('deals', data, params);
+    return this.crm.upsert('deals/upsert', data, params);
 };
 
 module.exports = Deals;
