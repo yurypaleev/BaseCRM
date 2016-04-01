@@ -23,8 +23,8 @@ Contacts.prototype.delete = function(id) {
     return this.crm.delete('contacts/' + id);
 };
 
-Contacts.prototype.upsert = function(params, data) {
-    return this.crm.upsert('contacts', params, data);
+Contacts.prototype.upsert = function(data, params) {
+    return this.crm.upsert('contacts', data, params);
 };
 
 module.exports = Contacts;

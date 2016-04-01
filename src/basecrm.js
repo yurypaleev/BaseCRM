@@ -113,7 +113,7 @@ BaseCRM.prototype.delete = function(resource) {
         return true;
     });
 };
-BaseCRM.prototype.upsert = function(resource, params, data) {
+BaseCRM.prototype.upsert = function(resource, data, params) {
     return this.request({
         method: 'POST',
         resource: resource,

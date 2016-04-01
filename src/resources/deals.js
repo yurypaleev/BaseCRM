@@ -23,8 +23,8 @@ Deals.prototype.delete = function(id) {
     return this.crm.delete('deals/' + id);
 };
 
-Deals.prototype.upsert = function(params, data) {
-    return this.crm.upsert('deals', params, data);
+Deals.prototype.upsert = function(data, params) {
+    return this.crm.upsert('deals', data, params);
 };
 
 module.exports = Deals;
