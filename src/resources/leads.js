@@ -23,4 +23,8 @@ Leads.prototype.delete = function(id) {
     return this.crm.delete('leads/' + id);
 };
 
+Leads.prototype.upsert = function(data, params) {
+    return this.crm.upsert('leads/upsert', data, params);
+};
+
 module.exports = Leads;

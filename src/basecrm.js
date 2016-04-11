@@ -113,6 +113,18 @@ BaseCRM.prototype.delete = function(resource) {
         return true;
     });
 };
+BaseCRM.prototype.upsert = function(resource, data, params) {
+    return this.request({
+        method: 'POST',
+        resource: resource,
+        params: params,
+        data: {
+            data: data
+        }
+    }).then(function(res) {
+        return res.data;
+    });
+};
 
 BaseCRM.version = 'v' + require('../package').version;
 
