@@ -4,11 +4,8 @@ function LossReasons(crm) {
     this.crm = crm;
 }
 
-LossReasons.prototype.find = function(data) {
-    if(typeof data === 'number') {
-        return this.crm.find('loss_reasons/' + data);
-    }
-    return this.crm.find('loss_reasons', data);
+LossReasons.prototype.find = function(params) {
+    return this.crm.find('loss_reasons', params);
 };
 
 LossReasons.prototype.create = function(data) {

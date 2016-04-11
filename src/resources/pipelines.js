@@ -1,5 +1,5 @@
 //  https://developers.getbase.com/docs/rest/reference/pipelines
 
-module.exports = function(data) {
-    return this.find('pipelines', data);
+module.exports = function(params) {
+    return this.find('pipelines', params);
 };

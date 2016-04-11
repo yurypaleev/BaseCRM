@@ -4,11 +4,8 @@ function Contacts(crm) {
     this.crm = crm;
 }
 
-Contacts.prototype.find = function(data) {
-    if(typeof data === 'number') {
-        return this.crm.find('contacts/' + data);
-    }
-    return this.crm.find('contacts', data);
+Contacts.prototype.find = function(params) {
+    return this.crm.find('contacts', params);
 };
 
 Contacts.prototype.create = function(data) {
@@ -23,8 +20,8 @@ Contacts.prototype.delete = function(id) {
     return this.crm.delete('contacts/' + id);
 };
 
-Contacts.prototype.upsert = function(data, params) {
-    return this.crm.upsert('contacts/upsert', data, params);
+Contacts.prototype.upsert = function(params, data) {
+    return this.crm.upsert('contacts', params, data);
 };
 
 module.exports = Contacts;

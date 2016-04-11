@@ -71,10 +71,12 @@ BaseCRM.prototype.request = function(options) {
 };
 
 BaseCRM.prototype.find = function(resource, params) {
+    var isId = typeof params === 'number';
+
     return this.request({
         method: 'GET',
-        resource: resource,
-        params: params
+        resource: resource + (isId ? '/' + params : ''),
+        params: isId ? null : params
     }).then(function(res) {
         return res.meta.type === 'collection' ?
             res.items.map(function(item) {
@@ -84,15 +86,7 @@ BaseCRM.prototype.find = function(resource, params) {
     });
 };
 BaseCRM.prototype.create = function(resource, data) {
-    return this.request({
-        method: 'POST',
-        resource: resource,
-        data: {
-            data: data
-        }
-    }).then(function(res) {
-        return res.data;
-    });
+    return this.upsert(resource, null, data);
 };
 BaseCRM.prototype.update = function(resource, data) {
     return this.request({
@@ -113,10 +107,10 @@ BaseCRM.prototype.delete = function(resource) {
         return true;
     });
 };
-BaseCRM.prototype.upsert = function(resource, data, params) {
+BaseCRM.prototype.upsert = function(resource, params, data) {
     return this.request({
         method: 'POST',
-        resource: resource,
+        resource: resource + (Object.keys(params).length ? '/upsert' : ''),
         params: params,
         data: {
             data: data

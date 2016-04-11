@@ -4,14 +4,11 @@ function LineItems(crm) {
     this.crm = crm;
 }
 
-LineItems.prototype.find = function(orderId, data) {
+LineItems.prototype.find = function(orderId, params) {
     if(typeof orderId !== 'number') {
         orderId = orderId.id;
     }
-    if(typeof data === 'number') {
-        return this.crm.find('orders/' + orderId + '/line_items/' + data);
-    }
-    return this.crm.find('orders/' + orderId + '/line_items', data);
+    return this.crm.find('orders/' + orderId + '/line_items', params);
 };
 
 LineItems.prototype.create = function(orderId, data) {

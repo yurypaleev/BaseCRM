@@ -4,11 +4,8 @@ function Tasks(crm) {
     this.crm = crm;
 }
 
-Tasks.prototype.find = function(data) {
-    if(typeof data === 'number') {
-        return this.crm.find('tasks/' + data);
-    }
-    return this.crm.find('tasks', data);
+Tasks.prototype.find = function(params) {
+    return this.crm.find('tasks', params);
 };
 
 Tasks.prototype.create = function(data) {

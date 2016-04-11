@@ -4,11 +4,8 @@ function Leads(crm) {
     this.crm = crm;
 }
 
-Leads.prototype.find = function(data) {
-    if(typeof data === 'number') {
-        return this.crm.find('leads/' + data);
-    }
-    return this.crm.find('leads', data);
+Leads.prototype.find = function(params) {
+    return this.crm.find('leads', params);
 };
 
 Leads.prototype.create = function(data) {
@@ -23,8 +20,8 @@ Leads.prototype.delete = function(id) {
     return this.crm.delete('leads/' + id);
 };
 
-Leads.prototype.upsert = function(data, params) {
-    return this.crm.upsert('leads/upsert', data, params);
+Leads.prototype.upsert = function(params, data) {
+    return this.crm.upsert('leads', params, data);
 };
 
 module.exports = Leads;

@@ -4,11 +4,8 @@ function Notes(crm) {
     this.crm = crm;
 }
 
-Notes.prototype.find = function(data) {
-    if(typeof data === 'number') {
-        return this.crm.find('notes/' + data);
-    }
-    return this.crm.find('notes', data);
+Notes.prototype.find = function(params) {
+    return this.crm.find('notes', params);
 };
 
 Notes.prototype.create = function(data) {

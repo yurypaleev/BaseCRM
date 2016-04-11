@@ -4,11 +4,8 @@ function Tags(crm) {
     this.crm = crm;
 }
 
-Tags.prototype.find = function(data) {
-    if(typeof data === 'number') {
-        return this.crm.find('tags/' + data);
-    }
-    return this.crm.find('tags', data);
+Tags.prototype.find = function(params) {
+    return this.crm.find('tags', params);
 };
 
 Tags.prototype.create = function(data) {

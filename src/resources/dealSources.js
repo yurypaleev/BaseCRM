@@ -4,11 +4,8 @@ function DealSources(crm) {
     this.crm = crm;
 }
 
-DealSources.prototype.find = function(data) {
-    if(typeof data === 'number') {
-        return this.crm.find('deal_sources/' + data);
-    }
-    return this.crm.find('deal_sources', data);
+DealSources.prototype.find = function(params) {
+    return this.crm.find('deal_sources', params);
 };
 
 DealSources.prototype.create = function(data) {

@@ -4,11 +4,8 @@ function Users(crm) {
     this.crm = crm;
 }
 
-Users.prototype.find = function(data) {
-    if(typeof data === 'number') {
-        return this.crm.find('users/' + data);
-    }
-    return this.crm.find('users', data);
+Users.prototype.find = function(params) {
+    return this.crm.find('users', params);
 };
 
 Users.prototype.self = function() {

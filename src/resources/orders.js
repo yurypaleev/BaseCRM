@@ -4,11 +4,8 @@ function Orders(crm) {
     this.crm = crm;
 }
 
-Orders.prototype.find = function(data) {
-    if(typeof data === 'number') {
-        return this.crm.find('orders/' + data);
-    }
-    return this.crm.find('orders', data);
+Orders.prototype.find = function(params) {
+    return this.crm.find('orders', params);
 };
 
 Orders.prototype.create = function(data) {

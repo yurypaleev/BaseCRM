@@ -4,11 +4,8 @@ function LeadSources(crm) {
     this.crm = crm;
 }
 
-LeadSources.prototype.find = function(data) {
-    if(typeof data === 'number') {
-        return this.crm.find('lead_sources/' + data);
-    }
-    return this.crm.find('lead_sources', data);
+LeadSources.prototype.find = function(params) {
+    return this.crm.find('lead_sources', params);
 };
 
 LeadSources.prototype.create = function(data) {
