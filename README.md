@@ -114,6 +114,13 @@ resource.update(id[, data])
 //  DELETE A RESOURCE
 resource.delete(id)
   .then(function() {})
+
+
+// UPSERT A RESOURCE
+var resource = crm.contacts;  //  or crm.deals and crm.leads
+
+resource.upsert(params, data)
+  .then(function(data) {})
 ```
 
 ##### [Users](https://developers.getbase.com/docs/rest/reference/users "API Documentation")
