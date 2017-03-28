@@ -16,7 +16,8 @@ var BaseCRM = require('basecrm');
 __Using this api without authentication gives an error__
 
 ```javascript
-var crm = new BaseCRM({
+//  BaseCRM equal to BaseCRM.Client
+var client = new BaseCRM.Client({
   accessToken: '<YOUR_PERSONAL_ACCESS_TOKEN>'
 });
 ```
@@ -30,114 +31,52 @@ The following options are available while instantiating a client:
  * __userAgent__: Default user-agent for all requests
  * __timeout__: Request timeout
 
-### Resources and actions
+### Resources documentations
 
-All requests use Promise with REST.
- 
-##### [Account](https://developers.getbase.com/docs/rest/reference/account "API Documentation")
+Most of the resources now have a **Model API**, read the details in the documentations below.
 
-```javascript
-//  RETRIEVE ACCOUNT DETAILS
-crm.account()
-  .then(function(data) {})
-```
+- [Account](https://github.com/yurypaleev/BaseCRM/blob/master/src/account/README.md "API Documentation")
+- [Associated Contacts](https://github.com/yurypaleev/BaseCRM/blob/master/src/associated_contacts/README.md "API Documentation")
+- [Contacts](https://github.com/yurypaleev/BaseCRM/blob/master/src/contacts/README.md "API Documentation")
+- [Deal Sources](https://github.com/yurypaleev/BaseCRM/blob/master/src/deal_sources/README.md "API Documentation")
+- [Deals](https://github.com/yurypaleev/BaseCRM/blob/master/src/deals/README.md "API Documentation")
+- [Lead Sources](https://github.com/yurypaleev/BaseCRM/blob/master/src/lead_sources/README.md "API Documentation")
+- [Leads](https://github.com/yurypaleev/BaseCRM/blob/master/src/leads/README.md "API Documentation")
+- [Line Items](https://github.com/yurypaleev/BaseCRM/blob/master/src/line_items/README.md "API Documentation")
+- [Loss Reasons](https://github.com/yurypaleev/BaseCRM/blob/master/src/loss_reasons/README.md "API Documentation")
+- [Notes](https://github.com/yurypaleev/BaseCRM/blob/master/src/notes/README.md "API Documentation")
+- [Orders](https://github.com/yurypaleev/BaseCRM/blob/master/src/orders/README.md "API Documentation")
+- [Pipelines](https://github.com/yurypaleev/BaseCRM/blob/master/src/pipelines/README.md "API Documentation")
+- [Products](https://github.com/yurypaleev/BaseCRM/blob/master/src/products/README.md "API Documentation")
+- [Stages](https://github.com/yurypaleev/BaseCRM/blob/master/src/stages/README.md "API Documentation")
+- [Tags](https://github.com/yurypaleev/BaseCRM/blob/master/src/tags/README.md "API Documentation")
+- [Tasks](https://github.com/yurypaleev/BaseCRM/blob/master/src/tasks/README.md "API Documentation")
+- [Users](https://github.com/yurypaleev/BaseCRM/blob/master/src/users/README.md "API Documentation")
 
-##### [Associated Contacts](https://developers.getbase.com/docs/rest/reference/associated_contacts "API Documentation")
+## Sync API
 
-```javascript
-//  RETRIEVE DEAL'S ASSOCIATED CONTACTS
-crm.associatedContacts.find(dealId[, params])
-  .then(function(items) {})
-  
-//  CREATE AN ASSOCIATED CONTACT
-crm.associatedContacts.create(dealId, data)
-  .then(function(data) {})
-  
-//  REMOVE AN ASSOCIATED CONTACT
-crm.associatedContacts.remove(dealId, contactId)
-  .then(function() {})
-```
+The following sample code shows how to perform a full synchronization flow using high-level wrapper.
 
-##### [Line Items](https://developers.getbase.com/docs/rest/reference/line_items "API Documentation")
-
-```javascript
-//  RETRIEVE ORDER'S LINE ITEMS
-crm.lineItems.find(orderId[, params])
-  .then(function(items) {})
-  
-//  RETRIEVE A SINGLE LINE ITEM
-crm.lineItems.find(orderId, lineItemId)
-  .then(function(items) {})
-  
-//  CREATE A LINE ITEM
-crm.lineItems.create(orderId, data)
-  .then(function(data) {})
-  
-//  REMOVE A LINE ITEM
-crm.lineItems.remove(orderId, lineItemId)
-  .then(function() {})
-```
- 
-##### [Pipelines](https://developers.getbase.com/docs/rest/reference/pipelines "API Documentation") and [Stages](https://developers.getbase.com/docs/rest/reference/stages "API Documentation")
+First of all you need an instance of `BaseCRM.Client`. High-level `BaseCRM.Sync` wrapper uses `BaseCRM.Sync.Service` to interact with the Sync API.
+In addition to the client instance, you must provide a device’s UUID within `deviceUUID` parameter. The device’s UUID must not change between synchronization sessions, otherwise the sync service will not recognize the device and will send all the data again.
 
 ```javascript
-//  RETRIEVE ALL PIPELINES
-crm.pipelines([params])
-  .then(function(items) {})
-  
-//  RETRIEVE ALL STAGES
-crm.stages([params])
-  .then(function(items) {})
+var client = new BaseCRM.Client({
+  accessToken: '<YOUR_PERSONAL_ACCESS_TOKEN>'
+});
+var sync = new BaseCRM.Sync(client, '<YOUR_DEVICES_UUID>');
 ```
 
-##### [Contacts](https://developers.getbase.com/docs/rest/reference/contacts "API Documentation"), [Deal Sources](https://developers.getbase.com/docs/rest/reference/deal_sources "API Documentation"), [Deals](https://developers.getbase.com/docs/rest/reference/deals "API Documentation"), [Lead Sources](https://developers.getbase.com/docs/rest/reference/lead_sources "API Documentation"), [Leads](https://developers.getbase.com/docs/rest/reference/leads "API Documentation"), [Loss Reasons](https://developers.getbase.com/docs/rest/reference/loss_reasons "API Documentation"), [Notes](https://developers.getbase.com/docs/rest/reference/notes "API Documentation"), [Orders](https://developers.getbase.com/docs/rest/reference/orders "API Documentation"), [Products](https://developers.getbase.com/docs/rest/reference/products "API Documentation"), [Tags](https://developers.getbase.com/docs/rest/reference/tags "API Documentation") and [Tasks](https://developers.getbase.com/docs/rest/reference/tasks "API Documentation")
+Now all you have to do is to call `fetch` method and pass a block that you might use to store fetched data to a database.
 
 ```javascript
-var resource = crm.contacts;  //  or crm.dealSources, crm.deals, crm.leadSources, crm.leads, crm.lossReasons, crm.notes, crm.orders, crm.products, crm.tags and crm.tasks
-
-//  RETRIEVE ALL RESOURCES
-resource.find([params])
-  .then(function(items) {})
-  
-//  RETRIEVE A SINGLE RESOURCE
-resource.find(id)
-  .then(function(data) {})
-  
-//  CREATE A RESOURCE
-resource.create(data)
-  .then(function(data) {})
-  
-//  UPDATE A RESOURCE
-resource.update(id[, data])
-  .then(function(data) {})
-  
-//  DELETE A RESOURCE
-resource.delete(id)
-  .then(function() {})
-
-
-// UPSERT A RESOURCE
-var resource = crm.contacts;  //  or crm.deals and crm.leads
-
-resource.upsert(params, data)
-  .then(function(data) {})
+var db = [];
+sync.fetch(function(type, action, data) {
+  return db.indexOf(type + '_' + JSON.stringify(data)) ? BaseCRM.Sync.ACK : BaseCRM.Sync.NACK;
+});
 ```
 
-##### [Users](https://developers.getbase.com/docs/rest/reference/users "API Documentation")
-
-```javascript
-//  RETRIEVE ALL USERS
-crm.users.find([params])
-  .then(function(items) {})
-
-//  RETRIEVE A SINGLE USER
-crm.users.find(id)
-  .then(function(data) {})
-  
-//  RETRIEVE AN AUTHENTICATING USER
-crm.users.self()
-  .then(function(data) {})
-```
+Notice that you must return `BaseCRM.Sync.ACK` or `BaseCRM.Sync.NACK`.
 
 ## License
 MIT

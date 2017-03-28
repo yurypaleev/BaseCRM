@@ -1,13 +1,14 @@
 {
   "name": "basecrm",
-  "version": "0.0.7",
+  "version": "0.1.2",
   "description": "Base CRM client for NodeJS",
   "keywords": [
     "basecrm",
     "crm",
     "rest",
     "api",
-    "promise"
+    "promise",
+    "model"
   ],
   "homepage": "https://github.com/yurypaleev/BaseCRM",
   "bugs": {
@@ -18,10 +19,13 @@
   "main": "./src/basecrm.js",
   "repository": {
     "type": "git",
-    "url": "git@github.com:yurypaleev/BaseCRM.git"
+    "url": "git+ssh://git@github.com/yurypaleev/BaseCRM.git"
   },
   "dependencies": {
-    "request-promise": "^2.0.1"
+    "extend": "^3.0.0",
+    "path": "^0.12.7",
+    "promise": "^7.1.1",
+    "request": "^2.79.0"
   },
   "engines": {
     "node": ">=0.10.0"
