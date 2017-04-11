@@ -51,7 +51,7 @@ Request.prototype = {
                 timeout: Math.max(0, options.timeout || req.options.timeout) * 1000,
                 json: true
             }, function(err, res, body) {
-                if('errors' in body) {
+                if(body !== undefined && 'errors' in body) {
                     err = body;
                     body = null;
                 }
