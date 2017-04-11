@@ -36,7 +36,7 @@ Service.prototype = {
             })
             .post('sync/ack', {
                 ack_keys: ackKeys
-            }, null, null, callback);
+            }, null,  callback);
     }
 };
 
