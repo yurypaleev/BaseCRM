@@ -1,11 +1,11 @@
 //  https://developers.getbase.com/docs/rest/reference/contacts
 
 var extend = require('extend');
-var proto = require('../methods');
+var readonly = ['id', 'creator_id', 'created_at', 'updated_at'];
 
-module.exports = function(client) {
+module.exports = function(client, model) {
     function Contact(data) {
-        extend(this, data);
+		return model(this, data, readonly);
     }
 
     extend(Contact, {
@@ -26,7 +26,7 @@ module.exports = function(client) {
         }
     });
 
-    extend(Contact.prototype, proto);
+    extend(Contact.prototype, model.methods);
 
     return Contact;
 };

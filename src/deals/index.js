@@ -1,11 +1,11 @@
 //  https://developers.getbase.com/docs/rest/reference/deals
 
 var extend = require('extend');
-var proto = require('../methods');
+var readonly = ['id', 'creator_id', 'last_stage_change_by_id', 'last_activity_at', 'dropbox_email', 'organization_id', 'created_at', 'updated_at'];
 
-module.exports = function(client) {
+module.exports = function(client, model) {
     function Deal(data) {
-        extend(this, data);
+		return model(this, data, readonly);
     }
 
     extend(Deal, {
@@ -26,7 +26,7 @@ module.exports = function(client) {
         }
     });
 
-    extend(Deal.prototype, proto, {
+    extend(Deal.prototype, model.methods, {
         findContacts: function(params, callback) {
             return client.associatedContacts.find(this.id, params, callback);
         },

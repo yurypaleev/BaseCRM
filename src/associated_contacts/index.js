@@ -1,10 +1,11 @@
 //  https://developers.getbase.com/docs/rest/reference/associated_contacts
 
 var extend = require('extend');
+var readonly = ['created_at', 'updated_at'];
 
-module.exports = function(client) {
+module.exports = function(client, model) {
     function AssociatedContact(data) {
-        extend(this, data);
+		return model(this, data, readonly);
     }
 
     extend(AssociatedContact, {

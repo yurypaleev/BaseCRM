@@ -1,11 +1,11 @@
 //  https://developers.getbase.com/docs/rest/reference/tags
 
 var extend = require('extend');
-var proto = require('../methods');
+var readonly = ['id', 'creator_id', 'created_at', 'updated_at'];
 
-module.exports = function(client) {
+module.exports = function(client, model) {
     function Tag(data) {
-        extend(this, data);
+		return model(this, data, readonly);
     }
 
     extend(Tag, {
@@ -23,7 +23,7 @@ module.exports = function(client) {
         }
     });
 
-    extend(Tag.prototype, proto);
+    extend(Tag.prototype, model.methods);
 
     return Tag;
 };

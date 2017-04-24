@@ -1,11 +1,11 @@
 //  https://developers.getbase.com/docs/rest/reference/tasks
 
 var extend = require('extend');
-var proto = require('../methods');
+var readonly = ['id', 'creator_id', 'completed_at', 'overdue', 'created_at', 'updated_at'];
 
-module.exports = function(client) {
+module.exports = function(client, model) {
     function Task(data) {
-        extend(this, data);
+		return model(this, data, readonly);
     }
 
     extend(Task, {
@@ -23,7 +23,7 @@ module.exports = function(client) {
         }
     });
 
-    extend(Task.prototype, proto);
+    extend(Task.prototype, model.methods);
 
     return Task;
 };

@@ -1,11 +1,11 @@
 //  https://developers.getbase.com/docs/rest/reference/products
 
 var extend = require('extend');
-var proto = require('../methods');
+var readonly = ['id', 'created_at', 'updated_at'];
 
-module.exports = function(client) {
+module.exports = function(client, model) {
     function Product(data) {
-        extend(this, data);
+		return model(this, data, readonly);
     }
 
     extend(Product, {
@@ -23,7 +23,7 @@ module.exports = function(client) {
         }
     });
 
-    extend(Product.prototype, proto);
+    extend(Product.prototype, model.methods);
 
     return Product;
 };

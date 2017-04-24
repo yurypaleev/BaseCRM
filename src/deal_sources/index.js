@@ -1,11 +1,11 @@
 //  https://developers.getbase.com/docs/rest/reference/deal_sources
 
 var extend = require('extend');
-var proto = require('../methods');
+var readonly = ['id', 'creator_id', 'created_at', 'updated_at'];
 
-module.exports = function(client) {
+module.exports = function(client, model) {
     function Source(data) {
-        extend(this, data);
+		return model(this, data, readonly);
     }
 
     extend(Source, {
@@ -23,7 +23,7 @@ module.exports = function(client) {
         }
     });
 
-    extend(Source.prototype, proto);
+    extend(Source.prototype, model.methods);
 
     return Source;
 };

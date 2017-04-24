@@ -1,11 +1,11 @@
 //  https://developers.getbase.com/docs/rest/reference/loss_reasons
 
 var extend = require('extend');
-var proto = require('../methods');
+var readonly = ['id', 'creator_id', 'created_at', 'updated_at'];
 
-module.exports = function(client) {
+module.exports = function(client, model) {
     function Reason(data) {
-        extend(this, data);
+		return model(this, data, readonly);
     }
 
     extend(Reason, {
@@ -23,7 +23,7 @@ module.exports = function(client) {
         }
     });
 
-    extend(Reason.prototype, proto);
+    extend(Reason.prototype, model.methods);
 
     return Reason;
 };

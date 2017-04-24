@@ -1,10 +1,11 @@
 //  https://developers.getbase.com/docs/rest/reference/line_items
 
 var extend = require('extend');
+var readonly = ['id', 'name', 'sku', 'description', 'creator_id', 'created_at', 'updated_at'];
 
-module.exports = function(client) {
+module.exports = function(client, model) {
     function Item(data) {
-        extend(this, data);
+		return model(this, data, readonly);
     }
 
     extend(Item, {

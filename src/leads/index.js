@@ -1,11 +1,11 @@
 //  https://developers.getbase.com/docs/rest/reference/leads
 
 var extend = require('extend');
-var proto = require('../methods');
+var readonly = ['id', 'creator_id', 'created_at', 'updated_at'];
 
-module.exports = function(client) {
+module.exports = function(client, model) {
     function Lead(data) {
-        extend(this, data);
+		return model(this, data, readonly);
     }
 
     extend(Lead, {
@@ -26,7 +26,7 @@ module.exports = function(client) {
         }
     });
     
-    extend(Lead.prototype, proto);
+    extend(Lead.prototype, model.methods);
     
     return Lead;
 };

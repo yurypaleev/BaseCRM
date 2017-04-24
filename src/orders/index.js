@@ -1,11 +1,11 @@
 //  https://developers.getbase.com/docs/rest/reference/orders
 
 var extend = require('extend');
-var proto = require('../methods');
+var readonly = ['id', 'created_at', 'updated_at'];
 
-module.exports = function(client) {
+module.exports = function(client, model) {
     function Order(data) {
-        extend(this, data);
+		return model(this, data, readonly);
     }
 
     extend(Order, {
@@ -23,7 +23,7 @@ module.exports = function(client) {
         }
     });
 
-    extend(Order.prototype, proto, {
+    extend(Order.prototype, model.methods, {
         findItems: function(params, callback) {
             return client.lineItems.find(this.id, params, callback);
         },

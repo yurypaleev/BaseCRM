@@ -1,10 +1,11 @@
 //  https://developers.getbase.com/docs/rest/reference/users
 
 var extend = require('extend');
+var readonly = ['id', 'status', 'role', 'confirmed', 'creator_id', 'created_at', 'updated_at'];
 
-module.exports = function(client) {
+module.exports = function(client, model) {
     function User(data) {
-        extend(this, data);
+		return model(this, data, readonly);
     }
 
     return extend(User, {

@@ -1,11 +1,11 @@
 //  https://developers.getbase.com/docs/rest/reference/notes
 
 var extend = require('extend');
-var proto = require('../methods');
+var readonly = ['id', 'creator_id', 'created_at', 'updated_at'];
 
-module.exports = function(client) {
+module.exports = function(client, model) {
     function Note(data) {
-        extend(this, data);
+		return model(this, data, readonly);
     }
 
     extend(Note, {
@@ -23,7 +23,7 @@ module.exports = function(client) {
         }
     });
 
-    extend(Note.prototype, proto);
+    extend(Note.prototype, model.methods);
 
     return Note;
 };
