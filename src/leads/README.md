@@ -92,7 +92,7 @@ lead.delete([callback(err, state)]);
 ### Assign a note
 
 ```javascript
-.assignNote(data[, callback(err, note)]);
+lead.assignNote(data[, callback(err, note)]);
 ```
 
 - `data` is model of the [note](https://github.com/yurypaleev/BaseCRM/blob/master/src/notes/README.md "API Documentation") or string
