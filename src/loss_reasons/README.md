@@ -16,10 +16,10 @@ client.lossReasons.find([params][, callback(err, reasons)]);
 ### Create a loss reason
 
 ```javascript
-client.lossReasons.create(data[, callback(err, reason)]);
+client.lossReasons.create(name[, callback(err, reason)]);
 ```
 
-- `data` is a reason object
+- `name` is a string
 - `callback` is a function, not required
 
 ### Retrieve a single reason
@@ -34,11 +34,11 @@ client.lossReasons.find(id[, callback(err, reason)]);
 ### Update a loss reason
 
 ```javascript
-client.lossReasons.update(id, data[, callback(err, reason)]);
+client.lossReasons.update(id, name[, callback(err, reason)]);
 ```
 
 - `id` is a reason ID (number)
-- `data` is a updated params of the reason (object)
+- `name` is a string
 - `callback` is a function, not required
 
 ### Delete a reason
@@ -79,7 +79,8 @@ reason.delete([callback(err, state)]);
 
 - `callback` is a function, not required
 
---
+---
+
 Detailed documentation in the [official API](https://developers.getbase.com/docs/rest/reference/loss_reasons "API Documentation")
 
 ## License

@@ -9,6 +9,9 @@ module.exports = function(client, model) {
     }
 
     extend(Tag, {
+		client: client,
+        type: 'tag',
+
         find: function(params, callback) {
             return client.request.get('tags', params, callback, this);
         },

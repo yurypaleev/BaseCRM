@@ -1,6 +1,6 @@
 {
   "name": "basecrm",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Base CRM client for NodeJS",
   "keywords": [
     "basecrm",

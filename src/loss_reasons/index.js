@@ -9,14 +9,21 @@ module.exports = function(client, model) {
     }
 
     extend(Reason, {
+		client: client,
+        type: 'loss_reason',
+
         find: function(params, callback) {
             return client.request.get('loss_reasons', params, callback, this);
         },
-        create: function(data, callback) {
-            return client.request.post('loss_reasons', data, null, callback, this);
+        create: function(name, callback) {
+            return client.request.post('loss_reasons', {
+                name: name
+            }, null, callback, this);
         },
-        update: function(id, data, callback) {
-            return client.request.put('loss_reasons/' + id, data, callback, this);
+        update: function(id, name, callback) {
+            return client.request.put('loss_reasons/' + id, {
+				name: name
+			}, callback, this);
         },
         delete: function(id, callback) {
             return client.request.delete('loss_reasons/' + id, callback);

@@ -79,7 +79,8 @@ tag.delete([callback(err, state)]);
 
 - `callback` is a function, not required
 
---
+---
+
 Detailed documentation in the [official API](https://developers.getbase.com/docs/rest/reference/tags "API Documentation")
 
 ## License

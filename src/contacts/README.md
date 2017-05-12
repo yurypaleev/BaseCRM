@@ -89,7 +89,26 @@ contact.delete([callback(err, state)]);
 
 - `callback` is a function, not required
 
---
+### Assign a note
+
+```javascript
+contact.assignNote(data[, callback(err, note)]);
+```
+
+- `data` is model of the [note](https://github.com/yurypaleev/BaseCRM/blob/master/src/notes/README.md "API Documentation") or string
+- `callback` is a function, not required
+
+### Assign a task
+
+```javascript
+contact.assignTask(task[, callback(err, task)]);
+```
+
+- `task` is model of the [task](https://github.com/yurypaleev/BaseCRM/blob/master/src/tasks/README.md "API Documentation")
+- `callback` is a function, not required
+
+---
+
 Detailed documentation in the [official API](https://developers.getbase.com/docs/rest/reference/contacts "API Documentation")
 
 ## License

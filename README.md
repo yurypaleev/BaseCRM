@@ -28,7 +28,6 @@ The following options are available while instantiating a client:
 
  * __accessToken__: Personal access token
  * __baseUrl__: Base url for the api
- * __userAgent__: Default user-agent for all requests
  * __timeout__: Request timeout
 
 ### Resources documentations

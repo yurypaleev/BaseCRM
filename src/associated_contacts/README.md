@@ -45,7 +45,8 @@ contact.remove(dealId, [callback(err, state)]);
 - `dealId` is unique identifier (number) of the deal
 - `callback` is a function, not required
 
---
+---
+
 Detailed documentation in the [official API](https://developers.getbase.com/docs/rest/reference/associated_contacts "API Documentation")
 
 ## License

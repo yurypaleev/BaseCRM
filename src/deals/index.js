@@ -9,6 +9,9 @@ module.exports = function(client, model) {
     }
 
     extend(Deal, {
+		client: client,
+		type: 'deal',
+
         find: function(params, callback) {
             return client.request.get('deals', params, callback, this);
         },
@@ -33,8 +36,8 @@ module.exports = function(client, model) {
         createContact: function(data, callback) {
             return client.associatedContacts.create(this.id, data, callback);
         },
-        removeContact: function(contactId, callback) {
-            return client.associatedContacts.remove(this.id, contactId, callback);
+        removeContact: function(contact, callback) {
+            return client.associatedContacts.remove(this.id, contact instanceof client.associatedContacts ? contact.id : contact, callback);
         }
     });
 

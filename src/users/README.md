@@ -30,7 +30,8 @@ client.users.self([callback(err, user)]);
 
 - `callback` is a function, not required
 
---
+---
+
 Detailed documentation in the [official API](https://developers.getbase.com/docs/rest/reference/users "API Documentation")
 
 ## License

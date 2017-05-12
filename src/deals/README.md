@@ -111,12 +111,34 @@ deal.createContact(data[, callback(err, contact)]);
 
 ```javascript
 deal.removeContact(contactId[, callback(err, state)]);
+//  or
+deal.removeContact(contact[, callback(err, state)]);
 ```
 
 - `contactId` is unique identifier (number) of the contact
+- `contact` is model of the [contact](https://github.com/yurypaleev/BaseCRM/blob/master/src/associated_contacts/README.md "API Documentation")
 - `callback` is a function, not required
 
---
+### Assign a note
+
+```javascript
+deal.assignNote(data[, callback(err, note)]);
+```
+
+- `data` is model of the [note](https://github.com/yurypaleev/BaseCRM/blob/master/src/notes/README.md "API Documentation") or string
+- `callback` is a function, not required
+
+### Assign a task
+
+```javascript
+deal.assignTask(task[, callback(err, task)]);
+```
+
+- `task` is model of the [task](https://github.com/yurypaleev/BaseCRM/blob/master/src/tasks/README.md "API Documentation")
+- `callback` is a function, not required
+
+---
+
 Detailed documentation in the [official API](https://developers.getbase.com/docs/rest/reference/deals "API Documentation")
 
 ## License

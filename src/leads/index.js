@@ -9,6 +9,9 @@ module.exports = function(client, model) {
     }
 
     extend(Lead, {
+		client: client,
+		type: 'lead',
+
         find: function(params, callback) {
             return client.request.get('leads', params, callback, this);
         },

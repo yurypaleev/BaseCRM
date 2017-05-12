@@ -26,7 +26,7 @@ function Client(options) {
     this.request = new Request(extend({
         accessToken: '',
         baseUrl: 'https://api.getbase.com',
-        userAgent: 'BaseCRM/v2 NodeJS/' + process.version,
+        version: 'v2',
         timeout: 30
     }, options));
     

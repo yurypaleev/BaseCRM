@@ -12,7 +12,8 @@ Return promise object.
 
 - `callback` is a function, not required
 
---
+---
+
 Detailed documentation in the [official API](https://developers.getbase.com/docs/rest/reference/account "API Documentation")
 
 ## License

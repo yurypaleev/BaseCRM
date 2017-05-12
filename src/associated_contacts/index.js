@@ -9,6 +9,9 @@ module.exports = function(client, model) {
     }
 
     extend(AssociatedContact, {
+		client: client,
+        type: 'associated_contact',
+
         find: function(dealId, params, callback) {
             return client.request.get('deals/' + dealId + '/associated_contacts', params, callback, this);
         },

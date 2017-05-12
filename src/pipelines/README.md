@@ -13,7 +13,8 @@ Return promise object.
 - `params` is object with a list of filters, not required
 - `callback` is a function, not required
 
---
+---
+
 Detailed documentation in the [official API](https://developers.getbase.com/docs/rest/reference/pipelines "API Documentation")
 
 ## License

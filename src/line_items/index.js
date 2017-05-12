@@ -9,10 +9,17 @@ module.exports = function(client, model) {
     }
 
     extend(Item, {
+		client: client,
+        type: 'line_item',
+
         find: function(orderId, params, callback) {
             return client.request.get('orders/' + orderId + '/line_items', params, callback, this);
         },
         create: function(orderId, data, callback) {
+		    if('product' in data && data.product instanceof client.products && data.product.id) {
+		        data.product_id = data.product.id;
+		        delete data.product;
+            }
             return client.request.post('orders/' + orderId + '/line_items', data, null, callback, this);
         },
         remove: function(orderId, id, callback) {

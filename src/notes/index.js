@@ -5,10 +5,15 @@ var readonly = ['id', 'creator_id', 'created_at', 'updated_at'];
 
 module.exports = function(client, model) {
     function Note(data) {
-		return model(this, data, readonly);
+		return model(this, typeof data === 'object' && data ? data : {
+			content: data
+		}, readonly);
     }
 
     extend(Note, {
+        client: client,
+        type: 'note',
+
         find: function(params, callback) {
             return client.request.get('notes', params, callback, this);
         },
@@ -23,7 +28,11 @@ module.exports = function(client, model) {
         }
     });
 
-    extend(Note.prototype, model.methods);
+    extend(Note.prototype, model.methods, {
+		assignTo: function(item, callback) {
+            return item.assignNote(this, callback);
+		}
+    });
 
     return Note;
 };

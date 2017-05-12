@@ -115,7 +115,8 @@ order.removeItem(lineItemId[, callback(err, state)]);
 - `lineItemId` is unique identifier (number) of the line item
 - `callback` is a function, not required
 
---
+---
+
 Detailed documentation in the [official API](https://developers.getbase.com/docs/rest/reference/orders "API Documentation")
 
 ## License

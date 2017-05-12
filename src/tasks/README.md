@@ -79,7 +79,17 @@ task.delete([callback(err, state)]);
 
 - `callback` is a function, not required
 
---
+### Assign a task
+
+```javascript
+task.assignTo(item[, callback(err, note)]);
+```
+
+- `item` is any model of the resources: [lead](https://github.com/yurypaleev/BaseCRM/blob/master/src/leads/README.md "API Documentation"), [contact](https://github.com/yurypaleev/BaseCRM/blob/master/src/contacts/README.md "API Documentation") or [deal](https://github.com/yurypaleev/BaseCRM/blob/master/src/deals/README.md "API Documentation")
+- `callback` is a function, not required
+
+---
+
 Detailed documentation in the [official API](https://developers.getbase.com/docs/rest/reference/tasks "API Documentation")
 
 ## License

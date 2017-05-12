@@ -9,6 +9,9 @@ module.exports = function(client, model) {
     }
 
     return extend(User, {
+		client: client,
+        type: 'user',
+
         find: function(params, callback) {
             return client.request.get('users', params, callback, this);
         },

@@ -22,6 +22,7 @@ client.lineItems.create(orderId, data[, callback(err, item)]);
 
 - `orderId` is unique identifier (number) of the order
 - `data` is a line item object
+- `data.product` is a model of the [product](https://github.com/yurypaleev/BaseCRM/blob/master/src/products/README.md "API Documentation")
 - `callback` is a function, not required
 
 ### Retrieve a single line item
@@ -55,7 +56,8 @@ item.remove(orderId, [callback(err, state)]);
 - `orderId` is unique identifier (number) of the order
 - `callback` is a function, not required
 
---
+---
+
 Detailed documentation in the [official API](https://developers.getbase.com/docs/rest/reference/line_items "API Documentation")
 
 ## License

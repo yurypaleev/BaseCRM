@@ -9,6 +9,9 @@ module.exports = function(client, model) {
     }
 
     extend(Order, {
+		client: client,
+        type: 'order',
+
         find: function(params, callback) {
             return client.request.get('orders', params, callback, this);
         },

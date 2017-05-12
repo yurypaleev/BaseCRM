@@ -9,11 +9,16 @@ module.exports = function(client, model) {
     }
 
     extend(Source, {
+		client: client,
+        type: 'source',
+
         find: function(params, callback) {
             return client.request.get('lead_sources', params, callback, this);
         },
         create: function(data, callback) {
-            return client.request.post('lead_sources', data, null, callback, this);
+            return client.request.post('lead_sources', typeof data === 'string' ? {
+				name: data
+			} : data, null, callback, this);
         },
         update: function(id, data, callback) {
             return client.request.put('lead_sources/' + id, data, callback, this);

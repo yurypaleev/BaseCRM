@@ -19,7 +19,7 @@ client.dealSources.find([params][, callback(err, sources)]);
 client.dealSources.create(data[, callback(err, source)]);
 ```
 
-- `data` is a source object
+- `data` is a source object or source name (`string`)
 - `callback` is a function, not required
 
 ### Retrieve a single source
@@ -79,7 +79,8 @@ source.delete([callback(err, state)]);
 
 - `callback` is a function, not required
 
---
+---
+
 Detailed documentation in the [official API](https://developers.getbase.com/docs/rest/reference/deal_sources "API Documentation")
 
 ## License

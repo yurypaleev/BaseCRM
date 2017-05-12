@@ -9,6 +9,9 @@ module.exports = function(client, model) {
     }
 
     extend(Task, {
+		client: client,
+        type: 'task',
+
         find: function(params, callback) {
             return client.request.get('tasks', params, callback, this);
         },
@@ -23,7 +26,11 @@ module.exports = function(client, model) {
         }
     });
 
-    extend(Task.prototype, model.methods);
+    extend(Task.prototype, model.methods, {
+		assignTo: function(item, callback) {
+			return item.assignTask(this, callback);
+		}
+	});
 
     return Task;
 };

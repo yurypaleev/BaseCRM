@@ -4,17 +4,13 @@ var extend = require('extend');
 var path = require('path');
 
 function transform(body, Model) {
-    var hasModel = Model instanceof Function;
-    
     if(body.meta.type === 'collection') {
         return body.items.map(function(item) {
-            return hasModel ?
-                new Model(item.data) :
-                item.data;
+            return transform(item, Model);
         });
     }
     
-    return hasModel ?
+    return Model instanceof Function ?
         new Model(body.data) :
         body.data;
 }
@@ -31,8 +27,9 @@ Request.prototype = {
     
     send: function(options, callback) {
         var req = this;
+        var version = options.version || req.options.version;
         var headers = req.headers(options.headers).headers({
-            'user-agent': req.options.userAgent,
+            'user-agent': 'BaseCRM/' + version + ' NodeJS/' + process.version,
             authorization: 'bearer ' + req.options.accessToken
         }).__headers;
 
@@ -42,7 +39,7 @@ Request.prototype = {
             request({
                 method: options.method,
                 baseUrl: req.options.baseUrl,
-                uri: path.join('/v2', options.resource),
+                uri: path.join('/' + version, options.resource),
                 body: options.data && {
                     data: options.data
                 },
@@ -51,13 +48,11 @@ Request.prototype = {
                 timeout: Math.max(0, options.timeout || req.options.timeout) * 1000,
                 json: true
             }, function(err, res, body) {
-                if(body !== undefined && 'errors' in body) {
-                    err = body;
-                    body = null;
-                }
-                
-                if(body) {
-                    try {
+                if(typeof body === 'object') {
+                    if('errors' in body) {
+                        err = body;
+                        body = null;
+                    } else try {
                         body = (options.transform || req.options.transform || transform)(body, options.Model) || body;
                     } catch(err) {}
                 }
@@ -85,7 +80,7 @@ Request.prototype = {
         var isId = typeof params === 'number';
         
         if(params instanceof Function) {
-            Model = callback;
+            Model = callback || Model;
             callback = params;
             params = null;
         }
